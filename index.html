@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Baseline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="topnav">
+    <button class="nav-btn active" onclick="showTab('home')">Home</button>
+    <button class="nav-btn" onclick="showTab('reflection')">Self-Reflection</button>
+    <button class="nav-btn" onclick="showTab('social')">Social Cues Practice</button>
+    <button class="nav-btn" onclick="showTab('resources')">Resources</button>
+  </nav>
+
+  <main class="page">
+
+    <!-- HOME -->
+    <div id="home" class="tab active">
+      <div class="home-page animate__animated animate__fadeIn">
+        <div class="oval-wrap">
+          <div class="oval">
+            <h1>Baseline</h1>
+            <p class="oval-desc">A regulation and social learning system for people with alexithymia, autism, and social anxiety.</p>
+          </div>
+        </div>
+        <div class="white-box animate__animated animate__fadeInUp">
+          Baseline helps you understand your internal emotional state, practice expressing emotions through facial cues, and interpret others' emotions — all in a private, judgment-free space. Use it before or after difficult social situations to regulate, reflect, and grow.
+        </div>
+        <div class="home-cards">
+          <div class="home-card hover-lift" onclick="showTab('reflection')">
+            <div class="home-card-title">Self-Reflection</div>
+            <div class="home-card-desc">Log your feelings and regulate with breathing</div>
+          </div>
+          <div class="home-card hover-lift" onclick="showTab('social')">
+            <div class="home-card-title">Social Cues</div>
+            <div class="home-card-desc">Practice expressions and read emotions</div>
+          </div>
+          <div class="home-card hover-lift" onclick="showTab('resources')">
+            <div class="home-card-title">Resources</div>
+            <div class="home-card-desc">Support links and further reading</div>
+          </div>
+</div>
+        <div class="home-videos">
+          <div class="video-card">
+            <video src="faces/video1.mov" controls class="home-video"></video>
+            <p class="video-caption">Breath Measuring Device Instructions: 1. Connect to power source 2. Tie around body so front and back are parallel 3. Breath out fully and press button to calibrate 4. Breath in and out in time with the boxed breath device 5. Both green lights should glow simultaneously.
+            </p>
+          </div>
+          <div class="video-card">
+            <video src="faces/video2.mov" controls class="home-video"></video>
+            <p class="video-caption">Breath Guidance Device Instructions: 1. Turn on the device 2. Breath in starting from the continuous blue lights 3. Hold breath through the white lights 4. Breath out through the blue lights 5. Hold breath through green lights 6. Repeat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- SELF-REFLECTION -->
+    <div id="reflection" class="tab">
+      <h2 class="page-title animate__animated animate__fadeInDown">Self-Reflection</h2>
+
+      <div class="purple-box animate__animated animate__fadeIn">
+        <p class="box-label">Instructions + Purpose</p>
+        Use this page to reflect on how you felt during a situation, practice breathing to regulate your nervous system, and log your experience for future reference or to share with a therapist.
+      </div>
+
+      <div class="section-header blue">My Past Logs</div>
+      <div class="white-box log-list-box">
+        <div id="logList"><p class="empty-state">No entries yet.</p></div>
+      </div>
+      <div class="btn-row" style="margin-bottom:18px">
+  <button class="btn-purple hover-lift" style="flex:1" onclick="exportPDF()">Export as PDF</button>
+  <button class="btn-blue hover-lift" style="flex:1" onclick="resetLogs()">Reset Logs</button>
+</div>
+
+      <div class="section-header blue">New Log</div>
+      <div class="white-box form-box">
+        <div class="form-row">
+          <label>Type</label>
+          <select id="logCategory">
+            <option value="medical">Medical / Physical</option>
+            <option value="mental">Mental / Emotional</option>
+            <option value="social">Social Interaction</option>
+            <option value="sensory">Sensory</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>What happened?</label>
+          <textarea id="logNote" placeholder="Describe the situation..."></textarea>
+        </div>
+        <div class="form-row">
+          <label>How do you feel?</label>
+          <textarea id="logFeel" placeholder="Describe your emotional state..."></textarea>
+        </div>
+        <div class="form-row">
+          <label>How intense is it out of 10? <span id="intensityVal">5</span></label>
+          <input type="range" id="logIntensity" min="1" max="10" value="5" />
+        </div>
+      </div>
+
+      <div class="purple-box">
+        <p class="box-label">Breathing Exercise</p>
+        Follow the square breathing guide below. Breathe in for 4 seconds, hold for 4, breathe out for 4, hold for 4. This helps regulate your nervous system before continuing your reflection.
+      </div>
+
+      <div class="timer-row">
+        <div class="timer-box">
+          <div class="timer-display" id="timerDisplay">1:30</div>
+          <div class="timer-controls">
+            <button class="btn-blue hover-lift" onclick="startTimer()">Start</button>
+            <button class="btn-blue hover-lift" onclick="resetTimer()">Reset</button>
+          </div>
+          <div class="square-breath-container">
+            <div class="square-breath-grid">
+              <div class="sq-corner"></div>
+              <div class="sq-side sq-top">
+                <div class="sq-led" id="sq-t1"></div>
+                <div class="sq-led" id="sq-t2"></div>
+                <div class="sq-led" id="sq-t3"></div>
+              </div>
+              <div class="sq-corner"></div>
+              <div class="sq-side sq-left">
+                <div class="sq-led" id="sq-l1"></div>
+                <div class="sq-led" id="sq-l2"></div>
+                <div class="sq-led" id="sq-l3"></div>
+              </div>
+              <div class="sq-center">
+                <button class="sq-btn" onclick="toggleSquareBreath()" id="squareStart">▶</button>
+              </div>
+              <div class="sq-side sq-right">
+                <div class="sq-led" id="sq-r1"></div>
+                <div class="sq-led" id="sq-r2"></div>
+                <div class="sq-led" id="sq-r3"></div>
+              </div>
+              <div class="sq-corner"></div>
+              <div class="sq-side sq-bottom">
+                <div class="sq-led" id="sq-b1"></div>
+                <div class="sq-led" id="sq-b2"></div>
+                <div class="sq-led" id="sq-b3"></div>
+              </div>
+              <div class="sq-corner"></div>
+            </div>
+            <div class="sq-phase-label" id="squareLabel">Press to begin</div>
+          </div>
+        </div>
+        <div class="wave-box">
+          <canvas id="breathCanvas" width="300" height="120"></canvas>
+          <p class="wave-caption">Ideal breathing pattern</p>
+        </div>
+      </div>
+
+      <div class="white-box form-box" style="margin-top:24px">
+        <p class="pt2-label">*log continued (pt 2)</p>
+        <div class="form-row">
+          <label>How intense do you still feel out of 10? <span id="intensity2Val">5</span></label>
+          <input type="range" id="logIntensity2" min="1" max="10" value="5" />
+        </div>
+        <div class="form-row">
+          <label>What about the situation caused you to feel this way?</label>
+          <textarea id="logCause" placeholder="What was the trigger?"></textarea>
+        </div>
+        <div class="form-row">
+          <label>What is something you could do to bring yourself back to baseline?</label>
+          <textarea id="logAction" placeholder="Coping strategy or next step..."></textarea>
+        </div>
+        <button class="btn-purple full hover-lift" onclick="addLogEntry()">Save New Log</button>
+      </div>
+    </div>
+
+    <!-- SOCIAL CUES PRACTICE -->
+    <div id="social" class="tab">
+      <h2 class="page-title animate__animated animate__fadeInDown">Social Cues Practice</h2>
+
+      <div class="purple-box animate__animated animate__fadeIn">
+        <p class="box-label">Instructions</p>
+        Practice two skills: expressing emotions with your face, and reading emotions in others.
+      </div>
+
+      <!-- EXPRESSION TRAINER -->
+      <div class="section-header blue">Expression Trainer</div>
+      <div class="social-box animate__animated animate__fadeInUp">
+        <div class="expression-pill" id="targetName">Genuine Smile</div>
+        <div class="hint-pill" id="targetHint">Hint: Raise your cheeks, let eyes squint slightly</div>
+        <div class="camera-wrap">
+          <video id="trainerVideo" autoplay playsinline></video>
+          <canvas id="trainerCanvas"></canvas>
+          <div class="camera-overlay" id="cameraOverlay"><span>Click BEGIN to start camera</span></div>
+        </div>
+        <div class="match-box" id="matchScore">Enable camera to see results</div>
+        <div class="feedback-bars" id="feedbackBars"></div>
+        <div class="btn-row">
+          <button class="btn-blue hover-lift" onclick="startTrainer()" id="trainerStartBtn">BEGIN</button>
+          <button class="btn-blue hover-lift" onclick="nextExpression()">NEXT EXPRESSION →</button>
+        </div>
+      </div>
+
+      <!-- EMOTION READER -->
+      <div class="section-header blue" style="margin-top:32px">Emotion Reader</div>
+      <div class="social-box animate__animated animate__fadeInUp">
+        <p class="sub-desc">Look at the face. What is this person <em>really</em> feeling beneath the surface?</p>
+        <div class="reader-layout">
+          <div class="face-display" id="faceDisplay">
+            <button class="btn-blue hover-lift" onclick="startEmotionRound()">Start Round</button>
+          </div>
+          <div class="reader-right">
+            <div class="choices-grid" id="choicesGrid">
+              <div class="choice-placeholder">Start a round to begin</div>
+            </div>
+            <div class="answer-reveal" id="answerReveal" style="display:none">
+              <div id="answerCorrect" class="answer-correct"></div>
+              <div id="answerExplanation" class="answer-explanation"></div>
+              <button class="btn-blue hover-lift" onclick="nextFace()">Next →</button>
+            </div>
+          </div>
+        </div>
+        <div class="score-line">Round: <span id="readerScore">0</span> / <span id="readerTotal">0</span> correct</div>
+        <div class="btn-row" style="justify-content:center;margin-top:4px">
+          <button class="btn-purple hover-lift" onclick="logReaderScore()" id="logReaderBtn" style="display:none">Log Score</button>
+          <button class="btn-blue hover-lift" onclick="resetEmotionReader()">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESOURCES -->
+    <div id="resources" class="tab">
+      <h2 class="page-title animate__animated animate__fadeInDown">Resources</h2>
+      <div class="purple-box animate__animated animate__fadeIn">
+        <p class="box-label">Who this site helps</p>
+        Baseline is designed for people with alexithymia, autism spectrum disorder, and social anxiety — as well as anyone who wants to better understand and regulate their emotional responses.
+      </div>
+      <div class="purple-box animate__animated animate__fadeIn" style="animation-delay:0.1s">
+        <p class="box-label">Getting further support</p>
+        <div class="resource-list">
+          <div class="resource-item hover-lift">
+            <span class="resource-num">1</span>
+            <span>Find a licensed therapist: <a href="https://www.psychologytoday.com/us/therapists" target="_blank">psychologytoday.com</a></span>
+          </div>
+          <div class="resource-item hover-lift">
+            <span class="resource-num">2</span>
+            <span>Learn about alexithymia: <a href="https://www.alexithymia.us" target="_blank">alexithymia.us</a></span>
+          </div>
+          <div class="resource-item hover-lift">
+            <span class="resource-num">3</span>
+            <span>Autism Self-Advocacy Network: <a href="https://autisticadvocacy.org" target="_blank">autisticadvocacy.org</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
